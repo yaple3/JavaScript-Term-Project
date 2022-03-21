@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+    h1{
+        font-size: 18px;
+    }
+    div{
+        text-align: center;
+        width: 150px;
+        height: 150px;
+        font-size: 8px;
+
+    }
+    canvas {
+        background-color: rgb(249, 216, 77);
+        border: 15px solid transparent;
+        padding: 15px;
+        border-image-source:url('media/tableclothBackground.jpg');  
+        border-image-repeat: round;
+        border-image-slice: 25;
+    }
+    footer{
+        font-size: 12px;
+    }
+</style>
+</head>
+<!-- change the onload to js function -->
+<body onload="startGame()"> 
+    <h1>Get the burger through the maze of fries</h1>
+    <div>
+        <button onmousedown="moveUp()" onmouseup="clearMove()" ontouchstart="moveUp()">UP</button><br><br>
+        <button onmousedown="moveLeft()" onmouseup="clearMove()" ontouchstart="moveLeft()">LEFT</button>
+        <button onmousedown="moveRight()" onmouseup="clearMove()" ontouchstart="moveRight()">RIGHT</button><br><br>
+        <button onmousedown="moveDown()" onmouseup="clearMove()" ontouchstart="moveDown()">DOWN</button>
+    </div>
+    <footer>&copy; Created By Jennifer Yaple 2022</footer>
+<script>
+var burger;
+var gameObstacles = [];
+var score;
+var currentLevel;
+var mySound;
+var myMusic;
+
+function startGame() {
+    burger = new component(55, 50, "media/burger.png", 10, 120, "image");  //(height, width, imageURL, x-coord, y-coord, type(image))
+    score = new component("20px", "Arial", "black", 300, 30, "text");
+    currentLevel = new component("20px", "Arial", "black", 100, 30, "text");
+    mySound = new sound("media/wahwaaahhh.mp3");
+    myMusic = new sound("media/gameTune.mp3");
+    myMusic.play();
+    gameArea.start();
+}
+
+var gameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 700;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.footer);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 13);
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
+    }   
+    /*
+    //upBtn
+    document.getElementById("up").addEventListener("touchstart", function(e) {
+        myGameArea.x = e.pageX;            
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("up").addEventListener("touchend", function(e) {
+        myGameArea.x = false;            
+        myGameArea.y = false;   //set to false when no longer touching screen
+    })
+    document.getElementById("up").addEventListener("mousedown", function(e) {
+        myGameArea.x = e.pageX;                         
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("up").addEventListener("mouseup", function(e) {
+        myGameArea.x = false;                         
+        myGameArea.y = false;       //set to false when mouse is released
+    })
+    //downBtn
+    document.getElementById("down").addEventListener("touchstart", function(e) {
+        myGameArea.x = e.pageX;            
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("down").addEventListener("touchend", function(e) {
+        myGameArea.x = false;            
+        myGameArea.y = false;   //set to false when no longer touching screen
+    })
+    document.getElementById("down").addEventListener("mousedown", function(e) {
+        myGameArea.x = e.pageX;                         
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("down").addEventListener("mouseup", function(e) {
+        myGameArea.x = false;                         
+        myGameArea.y = false;       //set to false when mouse is released
+    })
+    //leftBtn
+    document.getElementById("left").addEventListener("touchstart", function(e) {
+        myGameArea.x = e.pageX;            
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("left").addEventListener("touchend", function(e) {
+        myGameArea.x = false;            
+        myGameArea.y = false;   //set to false when no longer touching screen
+    })
+    document.getElementById("left").addEventListener("mousedown", function(e) {
+        myGameArea.x = e.pageX;                         
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("left").addEventListener("mouseup", function(e) {
+        myGameArea.x = false;                         
+        myGameArea.y = false;       //set to false when mouse is released
+    })
+    //rightBtn
+    document.getElementById("right").addEventListener("touchstart", function(e) {
+        myGameArea.x = e.pageX;            
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("right").addEventListener("touchend", function(e) {
+        myGameArea.x = false;            
+        myGameArea.y = false;   //set to false when no longer touching screen
+    })
+    document.getElementById("right").addEventListener("mousedown", function(e) {
+        myGameArea.x = e.pageX;                         
+        myGameArea.y = e.pageY;
+    })
+    document.getElementById("right").addEventListener("mouseup", function(e) {
+        myGameArea.x = false;                         
+        myGameArea.y = false;       //set to false when mouse is released
+    })
+    */
+    
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    if(type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = gameArea.context;
+        if(this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        }
+        else if(type == "image") {
+            ctx.drawImage(this.image,
+            this.x,
+            this.y,
+            this.width, this.height);
+        }
+        else{
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }    
+    this.crashWith = function(otherObj) {
+        var myLeft = this.x;
+        var myRight = this.x + (this.width);
+        var myUp = this.y;
+        var myDown = this.y + (this.height);
+        var otherLeft = otherObj.x;
+        var otherRight = otherObj.x + (otherObj.width);
+        var otherUp = otherObj.y;
+        var otherDown = otherObj.y + (otherObj.height);
+        var crash = true;
+        if ((myDown < otherUp) || (myUp > otherDown) || (myRight < otherLeft) || (myLeft > otherRight)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function updateGameArea() {
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < gameObstacles.length; i++) {
+        if (burger.crashWith(gameObstacles[i])) {
+            mySound.play();
+            myMusic.stop();
+            gameArea.stop();
+            return;
+        } 
+    }
+    gameArea.clear();
+    gameArea.frameNo += 1;
+    if (gameArea.frameNo == 1 || everyInterval(150)) {
+        x = gameArea.canvas.width;
+        minHeight = 90;
+        maxHeight = 160;
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        minGap = 80;
+        maxGap = 170;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        gameObstacles.push(new component(30, height, "media/fry2.png", x, 0, "image"));
+        gameObstacles.push(new component(30, x - height - gap, "media/fry.png", x, height + gap, "image"));
+    }
+    for (i = 0; i < gameObstacles.length; i ++) {
+        gameObstacles[i].speedX = -1;
+        gameObstacles[i].newPos();
+        gameObstacles[i].update();
+    }
+    score.text = "SCORE: " + gameArea.frameNo;
+    score.update();
+    currentLevel.text = "Level: " + Math.round(gameArea.frameNo/500);
+    currentLevel.update();
+    burger.newPos();
+    burger.update();
+}
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    if(src == "media/gameTune.mp3") {
+        this.sound.setAttribute("loop", true);
+    }
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
+
+function everyInterval(n) {
+    if ((gameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function moveUp() {
+    burger.speedY = -1; 
+}
+
+function moveDown() {
+    burger.speedY = 1; 
+}
+
+function moveLeft() {
+    burger.speedX = -1; 
+}
+
+function moveRight() {
+    burger.speedX = 1; 
+}
+
+function clearMove() {
+    burger.speedX = 0; 
+    burger.speedY = 0; 
+}
+</script>
+</body>
+</html>
