@@ -1,0 +1,229 @@
+/****** Colors Used: yellow: rgb(249, 216, 77), light green: rgb(193, 220, 44), bright green: rgb(111, 161, 0), dark green: rgb(38, 93, 0), purple: rgb(150, 0, 139), dark red: #A52119, bright red: #CA3A2F, pinkish red: #CE6D68, light pinkish red: #D7A4A2, whitish: #E0E7E8 rgb(204, 215, 228) ******/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Barlow Condensed', sans-serif;
+  overflow-x: hidden;
+}
+
+/****** Page Background ******/
+body {
+    background-image: url(../media/tableclothBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(249, 216, 77);
+    padding: 3%;
+}
+
+/****** Section Styling ******/
+section{
+    background-color: white;
+    border-radius: 25px;
+    border: 12px dotted #CA3A2F;
+    min-width: 100%;
+    min-height: 80%;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+h1{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2em; 
+    font-weight: 200;
+    font-style: italic;
+    text-shadow: 1px 1px #CA3A2F;
+    margin: auto;
+    padding: 10px;
+}
+h2{
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: .85em;
+    font-weight: 200;  
+    border-bottom: 12px dotted #CA3A2F;
+    margin: auto;
+    padding: 10px;
+}
+
+
+/****** Game Pieces ******/
+#iconContainer {
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 10px;
+}
+figure {
+    display: inline-block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#playerPic {
+    width: 30px;
+    height: 30px;
+} 
+#computerPic {
+    width: 40px;
+    height: 40px;
+}
+figcaption {
+    font-size: .75em;
+}
+#p {
+    color: rgb(111, 161, 0);
+    text-align: center;
+}
+#c {
+    color: #CA3A2F;
+    text-align: center;
+}
+
+/****** Center and Style Footer ******/
+footer {
+    margin: 3% auto 0 auto;
+    text-align: center;
+    padding: 3% 3% none 3%;
+    font-size: .75em;
+    clear: both;
+    width: fit-content;
+    border-radius: 20px;
+    max-height: 20px;
+}
+#footer:link, #footer:visited{
+    display: block;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+#footer:hover, #footer:active{
+    display:block;
+    background-color:black;
+    color:white;
+    max-height: 20px;
+}
+
+
+/****** Center and Style Game ******/
+.container {
+  height: 70%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 10px;
+  margin: 2% auto 2% auto;
+  text-align: center;
+  vertical-align: middle;
+}
+#winner {
+    border: none;
+}
+
+/****** NewGame Button ******/
+button {
+  border: 2px solid #CA3A2F;
+  padding: 5px 10px;
+  margin: 10px auto 10px auto;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 20px;
+  width: fit-content;
+  background-color: rgb(249, 216, 77);
+  margin-bottom: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+  background: white;
+  color: rgb(249, 216, 77);
+}
+
+/****** Game Board ******/
+.gameBoard {
+  display: grid;                            /* to display each box evenly */
+  width: 300px;
+  height: 300px;
+  grid-template-columns: auto auto auto;
+  background-color: rgb(25, 29, 31);
+  margin: 20px auto 0 auto;
+}
+.square {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  align-items: center;                      /* Center game pieces by displaying flex along with aligning items and justify-content with center */
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  border: 3px solid #E0E7E8;                  /* To look more like traditional Tic-Tac-Toe board */
+}
+
+/****** To show available play squares ******/
+.square:hover {
+  cursor: pointer;
+  background: rgb(111, 161, 0);
+}
+
+/****** To show non-available play squares ******/
+.occupied:hover {
+  background: #A52119;
+}
+
+/****** Change borders on individual squares to get the more classic Tic-Tac-Toe board look ******/
+#square0, #square1, #square2 {
+  border-top: none;
+}
+
+#square0, #square3, #square6 {
+  border-left: none;
+}
+
+#square6, #square7, #square8 {
+  border-bottom: none;
+}
+
+#square2, #square5, #square8 {
+  border-right: none;
+}
+
+/****** add styling to show difference in winners ******/
+.playerWin {
+    color: green;
+}
+  
+.computerWin {
+color: red;
+}
+
+.draw {
+color: yellow;
+}
+
+/****** mobile first styling ******/
+@media only screen and (min-width: 768px) {
+    .container {
+        max-width: 80%;
+        max-height: 100%;
+        padding: 0px 10px 20px 10px;
+        margin: 5% auto 5% auto;
+    }
+    h1 {
+        width: calc(100% - 10px);
+        text-align: center;
+        padding-top: 50px;
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.25em;
+        padding: 30px;
+        width: calc(100% - 10px);
+        text-align: center;
+    }
+}

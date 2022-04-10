@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <meta name="description" content="Interactive Tic-Tac-Toe game using HTML JavaScript and CSS" />
+        <meta name="keywords" content="interactive, game, tic-tac-toe, fun, easy" />
+        <link rel="stylesheet" href="css/ticTacToeGame.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <title>Tic-Tac-Toe Game</title>
+    </head>
+    <body>
+        <section class="container">
+            <h1>Tic-Tac-Toe</h1>
+            <h2>Similar to traditional Tic-Tac-Toe. Take turns with the computer. Click on a square to make your play. Be the first to get three in a row!</h2>
+
+            <!-- the game board -->
+            <div class="gameBoard">
+              <div id="square0" class="square"></div>
+              <div id="square1" class="square"></div>
+              <div id="square2" class="square"></div>
+              <div id="square3" class="square"></div>
+              <div id="square4" class="square"></div>
+              <div id="square5" class="square"></div>
+              <div id="square6" class="square"></div>
+              <div id="square7" class="square"></div>
+              <div id="square8" class="square"></div>
+            </div>
+            
+            <!-- h2 to hold space for adding who the winner is -->
+            <h2 id="winner"></h2>
+            <!-- button to reset to new game -->
+            <button id="reset">New Game</button>
+            <div id="iconContainer">
+                <figure>
+                    <img id="playerPic" src="media/fryX.png" alt="X">
+                    <figcaption id="p">Player</figcaption>
+                </figure>
+                <figure>
+                    <img id="computerPic" src="media/onionRingO.png" alt="O">
+                    <figcaption id="c">Computer</figcaption>
+                </figure>
+            </div>
+            <footer id="footer">&copy Created by Jennifer Yaple 2022</footer>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="js/ticTacToeGame.js"></script>
+        <noscript>Your browser does not support JavaScript</noscript>
+    </body>
+</html>
+
+

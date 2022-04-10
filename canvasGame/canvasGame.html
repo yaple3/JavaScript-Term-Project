@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="css/canvasGame.css" rel="stylesheet" type="text/css">
+<title>Burger Maze Canvas Game</title>
+</head>
+<body onload="startGame()">  
+    <section>
+        <h1>Get the burger through the maze of fries</h1>
+        <p>Click on the buttons to make the burger move.</p>
+        <div id="controls">
+            <button id="up" onmousedown="moveUp()" onmouseup="clearMove()" ontouchstart="moveUp()">&uarr;</button><br><br>
+            <button id="left" onmousedown="moveLeft()" onmouseup="clearMove()" ontouchstart="moveLeft()">&larr;</button>
+            <button id="right" onmousedown="moveRight()" onmouseup="clearMove()" ontouchstart="moveRight()">&rarr;</button><br><br>
+            <button id="down" onmousedown="moveDown()" onmouseup="clearMove()" ontouchstart="moveDown()">&darr;</button>
+        </div>
+        <footer id="footer">&copy Created by Jennifer Yaple 2022</footer>
+    </section>
+<script src="js/canvasGame.js"></script>
+<noscript>Your browser does not support JavaScript</noscript>
+</body>
+</html>

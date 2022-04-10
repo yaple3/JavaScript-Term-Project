@@ -1,0 +1,102 @@
+/* colors: #A52119, #AC605D, #B8A2A2, #B96963, #CA3A2F, #CE6D68, #D7A4A2, #E0E7E8 */
+*{
+    box-sizing: border-box;
+}
+body {
+    height: 100%;
+    vertical-align: auto;
+    margin: 5%;
+    text-align: center;
+    background-image: url("../media/tableclothBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+}
+section{
+    display:flex;
+    flex-wrap:wrap;
+    align-content: flex-start;
+    background-color: white;
+    border-radius: 25px;
+    border: 12px dotted #CA3A2F;
+    min-width: 100%;
+    min-height: 80%;
+    margin: auto;
+}
+h1{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2em; 
+    font-weight: 200;
+    font-style: italic;
+    text-shadow: 1px 1px #CA3A2F;
+    margin: auto;
+    padding: 10px;
+}
+h2{
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: .85em;
+    font-weight: 200;  
+    border-bottom: 12px dotted #CA3A2F;
+    margin: auto;
+    padding: 10px;
+}
+p{
+    margin: auto;
+}
+img{
+    width: 190px;
+}
+/****** Center and Style Footer ******/
+footer {
+    padding: 0;
+    font-size: .75em;
+    clear: both;
+    width: fit-content;
+    height: 15px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 45%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+#footer:link, #footer:visited{
+    display: block;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+#footer:hover, #footer:active{
+    display:block;
+    background-color:black;
+    color:white;
+}
+
+
+@media only screen and (min-width: 768px) {
+    section{
+        max-width: 75%;
+        min-height: 70vh;
+        padding: 0px 10px 200px 10px;
+    }
+    h1{
+        width: calc(100% - 10px);  
+        line-height: 10%;
+        text-align: center;
+        padding-top: 50px;
+    }
+    h2{
+        font-size: 1.5em;
+        line-height: 5%;
+        padding: 30px;
+        width: calc(100% - 10px);
+        text-align: center;
+    }
+    p{
+        padding-top: 50px;
+        width: 13%;
+    }
+    img{
+        width: 140px;
+    }
+}

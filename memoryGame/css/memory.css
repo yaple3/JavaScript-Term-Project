@@ -1,0 +1,171 @@
+/* colors: #A52119, #AC605D, #B8A2A2, #B96963, #CA3A2F, #CE6D68, #D7A4A2, #E0E7E8 */
+*{
+    box-sizing: border-box;
+}
+body html{
+    min-width: 100vw;
+    min-height: 100vh;
+}
+body {
+    margin: 5%;
+    background-image: url("../media/tableclothBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+}
+section{
+    background-color: white;
+    border-radius: 25px;
+    opacity: .95;
+    border: 12px dotted #CA3A2F;
+    min-width: 100%;
+    min-height: 100%;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+h1{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3em; 
+    font-weight: 200;
+    font-style: italic;
+    text-shadow: 1px 1px #CA3A2F;
+    padding-top: none;
+    padding-bottom: 5%;
+    line-height: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+#memoryHeading{
+    font-size: 2em;
+    margin-top: 10px;
+}
+#directions{
+    border: none;
+}
+span p{
+    width: 100%;
+    background-color: rgb(249, 216, 77);
+    font-size: 1.2em;
+    margin: 0 auto 5px auto;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    line-height: 125%;
+    border-radius: 25px;
+}
+.container{
+    background-color: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.container img{
+    display: block;
+    object-position: center;
+    object-fit: contain;
+    background-color: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.logo{
+    width: 80vw;
+}
+button{
+    border-radius: 20px;
+    margin:20px auto 5px auto;
+    text-align: center;
+    background-color: rgb(249, 216, 77);
+}
+button:hover{
+    color: rgb(249, 216, 77);
+    background-color: white;
+}
+/****** Center and Style Footer ******/
+footer {
+    margin: 3% auto 0 auto;
+    text-align: center;
+    padding: 3% 3% none 3%;
+    font-size: .75em;
+    clear: both;
+    width: fit-content;
+    border-radius: 20px;
+    max-height: 20px;
+}
+#footer:link, #footer:visited{
+    display: block;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+#footer:hover, #footer:active{
+    display:block;
+    background-color:black;
+    color:white;
+    max-height: 20px;
+}
+
+/* mobile first styling */
+
+/* Tablet */
+@media only screen and (min-width: 500px) {
+    section{
+        max-width: 95vw;
+        padding: none;
+    }
+    h1{
+        width: calc(100% - 8px);  
+        text-align: center;
+        line-height: .4em;
+        margin-top: none;
+        margin-bottom: none;
+    }
+    p{
+        width: 100%;
+        line-height: .75em;
+        margin-bottom: none;
+    }
+    button{
+        margin-bottom: none;
+        margin-top: 10px;
+    }
+    .logo{
+        width: 60vw;
+    }
+    #memoryHeading{
+        font-size: 1.65em;
+    }
+}
+/* Desktop */
+@media only screen and (min-width: 768px) {
+    section{
+        width: 70vw;
+        height: 20%;
+        padding: none;
+    }
+    h1{ 
+        line-height: .25em;
+        text-align: center;
+        margin-top: -5px;
+        margin-bottom: -20px;
+    }
+    p{
+        line-height: .7em;
+        width: 100%;
+        margin-top: -5px;
+        margin-bottom: none;
+    }
+    button{
+        margin-bottom: -20%;
+        margin-top: 20px;
+    }
+    .logo{
+        width: 40vw;
+    }
+    #memoryHeading{
+        font-size: 3em;
+    }
+}
