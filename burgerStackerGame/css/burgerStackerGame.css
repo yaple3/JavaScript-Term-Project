@@ -20,8 +20,7 @@ section{
     border-radius: 25px;
     border: 12px dotted #CA3A2F;
     min-width: 100%;
-    min-height: 80%;
-    margin: auto;
+    margin: 1% auto 0 auto;
 }
 h1{
     font-family: 'Barlow Condensed', sans-serif;
@@ -48,17 +47,15 @@ img{
 }
 /****** Center and Style Footer ******/
 footer {
-    padding: 0;
+    margin: 3% auto 0 auto;
+    text-align: center;
+    padding: 3% 3% none 3%;
     font-size: .75em;
     clear: both;
     width: fit-content;
-    height: 15px;
-    border-radius: 10px;
-    position: absolute;
-    bottom: 0;
-    left: 45%;
-    text-align: center;
-    margin-bottom: 10px;
+    border-radius: 20px;
+    max-height: 20px;
+    -ms-flex-align: end;
 }
 #footer:link, #footer:visited{
     display: block;
@@ -76,8 +73,8 @@ footer {
 @media only screen and (min-width: 768px) {
     section{
         max-width: 75%;
-        min-height: 70vh;
-        padding: 0px 10px 200px 10px;
+        min-height: 55vh;
+        padding: 0px 10px 2% 10px;
     }
     h1{
         width: calc(100% - 10px);  
@@ -98,5 +95,8 @@ footer {
     }
     img{
         width: 140px;
+    }
+    footer{
+        padding-bottom: 1%;
     }
 }

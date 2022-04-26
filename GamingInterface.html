@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="css/milestoneOneGamingInterface.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <title>JavaScript Games Term Project: Milestone #1 - Gaming Interface</title>
+    </head>
+    <body>
+        <main id="main">
+            <section class="main">
+                <header>
+                    <aside class="menuContainer">
+                        <p id="open">&#9776;</p>
+                    </aside>
+                    <h1>Playing With Your Food</h1>
+                </header>
+                <section>
+                    <h2>Choose a Game!</h1>
+                    <h3>Click on a button below to play.</h3>
+                    <div id="container">
+                        <figure id="burger"> 
+                            <img class="pic" src="media/BurgerStackerLogo.png" alt="Burger Stacking Game Logo">
+                            <figcaption>Burger Stacking Game</figcaption>
+                        </figure>
+                        <figure id="canvas">
+                            <img class="pic" src="media/canvasGameLogo.png" alt="Canvas Game Logo">
+                            <figcaption>Canvas Game</figcaption>
+                        </figure> 
+                        <figure id="tic">
+                            <img class="pic" src="media/Tic-Tac-ToeLogo.png" alt="Tic Tac Toe Game Logo">
+                            <figcaption>Tic Tac Toe Game</figcaption>
+                        </figure>
+                        <figure id="memory">
+                            <img class="pic" src="media/memoryGameLogo.png" alt="Memory Game Logo">
+                            <figcaption>Memory Game</figcaption>
+                        </figure> 
+                    </div>
+                </section>
+                <footer id="footer">&copy Created by Jennifer Yaple 2022</footer>
+            </section>
+            <nav id="mySideNav" class="sidenav">
+                <a href="javascript:void(0)" id="close" class="closebtn">&times;</a>
+                    <article class="directions">
+                        <section>
+                            <h1 class="instructions">Game Instructions:</h1>
+                            <hr>
+                            <hr>
+                        </section>
+                        <section>
+                            <h2 class="gameTitle">Burger Stacking Game</h2>
+                            <p>Drag and drop each burger element in the correct stacking order to make the perfect burger.</p>
+                        </section>
+                        <hr>
+                        <section>
+                            <h2 class="gameTitle">Canvas Game</h2>
+                            <p>Use the arrows to navigate the burger through the maze of fries without bumping into them.</p>
+                        </section>
+                        <hr>
+                        <section>
+                            <h2 class="gameTitle">Tic Tac Toe</h2>
+                            <p>Like classic Tic Tac Toe, but use fry Xs and onion-ring Os instead of regular Xs and Os to get three in a row horizontally, vertically or diagonally.</p>
+                        </section>
+                        <hr>
+                        <section>
+                            <h2 class="gameTitle">Memory Game</h2>
+                            <p>Click on a card and then click on another card to try and find the matching set.</p>
+                        </section>
+                    </article>
+            </nav>
+        </main>
+        <script src="js/milestoneOneGamingInterface.js"></script>
+    </body>
+</html>

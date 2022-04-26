@@ -1,23 +1,30 @@
+*{
+    box-sizing: border-box;
+}
 body{
     background-color: #A8170F;
 }
 section{
     background-color: white;
-    opacity: .85;
-    border: #FAB855;
-    border-radius: 30px;
-    float: left;
-    top: 0;
-    left: 50%;
-    padding: 10px;
-    margin: 5% 2% 1% 1%;
+    border-radius: 25px;
+    border: 12px dotted #CA3A2F;
+    min-width: 100%;
+    min-height: 80%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: .5% auto .5% auto;
+    text-align: center;
+    vertical-align: middle;
 }
 h1{
-font-size: 1.1em;
-line-height: 50%;
-margin-left: auto;
-margin-right: auto;
-text-align: center;
+    font-size: 1.1em;
+    line-height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 p{
     line-height: 50%;
@@ -64,4 +71,31 @@ footer{
     display:block;
     background-color:black;
     color:white;
+}
+/* grid classes */	
+.top{grid-area: t;}
+.bottom{grid-area: b;}
+.left{grid-area: l;}
+.middle{grid-area: mid;}
+.right{grid-area: r;}
+/* default grid container*/
+.grid-container{
+	display: grid;
+	grid-template-rows: max-content; /* sets size of row to largest element of row */
+	grid-template-areas: 
+	't t t t t t'
+	'l l mid mid r r'
+	'b b b b b b';
+}
+/* mobile grid container */
+@media (max-width:750px) {
+	.grid-container{
+		grid-template-areas: 
+		't t t t t t'
+		'l l l l l l'
+		'mid mid mid mid mid mid'
+		'r r r r r r'
+		'b b b b b b';
+	}
+	
 }

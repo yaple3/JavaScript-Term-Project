@@ -20,6 +20,7 @@ var gameArea = {
     start : function() {
         this.canvas.width = 700;
         this.canvas.height = 350;
+        this.canvas.
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.footer);
         this.frameNo = 0;

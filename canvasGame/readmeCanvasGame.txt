@@ -1,4 +1,4 @@
-/************************************************** Tic Tac Toe Game **************************************************/
+/************************************************** Canvas Game **************************************************/
 
 /***************Purpose***************/
 
@@ -6,20 +6,21 @@ To have fun!
  
 /***************Directions***************/
 
-X goes first and takes turns alternating with O.
-
-Click on a square to make your move.
-Try to get 3 in a row either vertically, horizontally or diagonally before the opposing player does.
-
-Click the New Game button to restart game.
+Use the mouse (or trackpad) to click on the direction arrows and move the burger icon through the maze of french fries without bumping into them.
+See how long you can go before the game ends.
 
 /***************Current Issues***************/
-no current issues 
+
+Can't get the footer to line up underneath the game canvas instead of showing up on top of it.
+Also need to make the canvas mobile-responsive.
+Will continue working on those.
 
 ***************Future Releases***************/
 
-Would like to allow player to choose their game piece and if they want to go first or second, instead of it being chosen for them.
-Also have user play against the computer with random computer moves. 
+Would like to make it so that you can use the arrow keys on the keyboard to move the burger instead of using a mouse or trackpad. 
+when I added the code to do that (using the W3 schools example) it wasn't working for me. 
+I will go back and try to figure out why and see if I can make it work.
+Would also like to tweak the styling some more.
 
 /***************Terms and Conditions***************/
 

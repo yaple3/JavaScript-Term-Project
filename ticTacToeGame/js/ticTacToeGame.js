@@ -1,135 +1,200 @@
-/* differentiate player and computer game pieces */
-var player = $("#playerPic");                           //<<<<<<<<game images not showing up>>>>>>>>>>>
-var computer = $("#computerPic");
+$(document).ready(function(){
+    /*VARIABLES*/
 
-/****** create variable that checks to see if the game board is full ******/
-var fullBoard = false;
+    //flag variable for resetting the game
+    var reset = $("#reset");
+    // flag variable for checking Turn
+    var turn = "X";
+    //flag variables for updating game info
+    var xWins = 0;
+    var oWins = 0;
+    var draws = 0;
 
-/****** declare gameBoard array ******/
-var gameBoard = ["", "", "", "", "", "", "", "", ""];
+    /* New Game */
+    $(reset).click(function() {
+        $("#turn").text("Player X Goes First");
+        $("#msg").text("");
+        $("#msg").css("background-color", "transparent");      
+        // Clear GameBoard
+        $("#square1").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square2").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square3").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square4").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square5").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square6").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square7").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square8").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        $("#square9").removeClass("oLogo").removeClass("xLogo").removeClass("occupied").removeClass("xWin").removeClass("oWin").removeClass("draw");
+        turn = "X";
+    });//end of new game (reset() function)
 
-
-
-/****** declare container variable for gameBoard array ******/
-var boardContainer = $(".gameBoard");
-
-/****** winner message ******/  
-var winner = $("#winner");
- 
-/****** check to see if the game board is full ******/
-var verifyFullBoard = () => {
-  var full = true;
-  gameBoard.forEach(element => {
-    if (element != player && element != computer) {
-      full = false;
-    }
-  });
-  fullBoard = full;
-}; //end verifyFullBoard function
-
-/****** the checkRow function should return the symbol of the player with three in a row ******/
-var checkRow = (a, b, c) => { // checks if all elements in a row are the same 
-    return (
-        gameBoard[a] == gameBoard[b] &&
-        gameBoard[b] == gameBoard[c] &&
-        (gameBoard[a] == player || gameBoard[a] == computer)    // checks to see if elements are the player's or computer's moves 
-    );
-}; //end checkRow function
-
-var checkMatch = () => {
-    /****** Use loop to check if there are row matches ******/
-    for (i = 0; i < 9; i += 3) {
-      if (checkRow(i, i + 1, i + 2)) {
-        return gameBoard[i];
-      }
-    }
-    /****** Use loop to check if there are column matches ******/
-    for (i = 0; i < 3; i++) {
-      if (checkRow(i, i + 3, i + 6)) {
-        return gameBoard[i];
-      }
-    }
-    /****** Use loop to check if there are diagonal matches ******/
-    if (checkRow(0, 4, 8)) {
-      return gameBoard[0];
-    }
-    if (checkRow(2, 4, 6)) {
-      return gameBoard[2];
-    }
-    return "";
-}; //end of checkMatch function
-  
-/****** Check for winner ******/
-var findWinner = () => {        // declare findWinner function 
-    var result = checkMatch();    // assign checkMatch function to new variable 
-    if (result == player) {           // if player has three in a row... 
-      winner.html = "Congratulations! You've beaten the computer!"; // add winning message 
-      winner.addClass("playerWin");  // add new class in order to add more styling in css 
-      fullBoard = true;                   // show the board is full so game is over 
-    } 
-    else if (result == computer) {            // if computer has three in a row... 
-      winner.html = "The computer has won.";  // add winning message */
-      winner.addClass("computerWin");    // add new class in order to add more styling in css
-      fullBoard = true;                       // show the board is full so game is over 
-    } 
-    else if (fullBoard) {                     // if the board is full before three in a row is achieved 
-      winner.html = "It's a tie!";            // declare tie 
-      winner.addClass("tie");            // add new class in order to add more styling in css 
-    }
-}; //end of findWinner function
-
-/****** update game board******/
-var updateBoard = () => {
-    boardContainer.innerHTML = "";    // clear board 
-    gameBoard.forEach((e, i) => {     // add div for each square w/ each individual id and player move
-      boardContainer.innerHTML += `<div id="square${i}" class="square" onclick="playerMove(${i})">${gameBoard[i]}</div>`;
-      if (e == player || e == computer) {
-        document.querySelector(`#square${i}`).classList.add("occupied");  // add occupied class to squares that are occupied 
-      }
+    //Playing the game
+    $("button").click(function() {
+        if(turn === "X") {
+            // add image & prevent add'tl plays on this square
+            $(this).addClass("xLogo occupied");   
+            //checks X win
+            if (checkX()) {
+                xWins++;        //add to xWins counter
+                $("#msg").text("X wins!");
+                $("#xWins").text(xWins); 
+                $(".square").addClass("occupied xWin"); //prevent more plays on empty squares after game over and add style
+                turn = 'Game Over';
+            } //checks for game ended without a winner
+            else if (checkDraw()) {
+                draws++;
+                $("#msg").text("GAME ENDED in a DRAW!");
+                $("#draws").text(draws);
+                $(".square").addClass("occupied draw"); //add styling if game ends in a draw
+                turn = 'Game Over';
+            }
+            //otherwise, if X didn't win, and the game didn't end in a draw, it's O's turn 
+            else {
+                turn = "O";
+            }     
+                
+        }
+        else { //if it's not X's turn, then it's O's turn
+            // add image & prevent add'tl plays on this square
+            $(this).addClass("oLogo occupied");
+            //checks O win
+            if (checkO()) {
+                oWins++;                    //add to oWins counter
+                $("#msg").text("O wins!");
+                $("#oWins").text(oWins);
+                $(".square").addClass("occupied oWin"); //prevent more plays on empty squares after game over
+                turn = 'Game Over';
+            } //checks for game ended without a winner
+            else if (checkDraw()) {
+                draws++;                        //add to draws counter
+                $("#msg").text("GAME ENDED in a DRAW!");
+                $("#draws").text(draws);
+                $(".square").addClass("draw"); //add styling if game ends in a draw
+                turn = 'Game Over';
+            } //if O didn't win, and the game didn't end in a draw, it's X's turn 
+            else {
+                turn = "X";
+            }
+        }
+        $("#turn").text(turn);   
     });
-};  //end of updateBoard function                                                                   //<<<<<<<<<<<<<<<this also isn't working>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-/******since both updateBoard and verifyFullBoard need to be checked at each turn, combine them in new function while also checking for winner ******/
-var gameTurn = () => {
-    updateBoard();
-    verifyFullBoard();
-    findWinner();
-};  //end of gameTurn function
 
-/******prevent plays once board is full ******/
-var playerMove = e => {
-    if (!fullBoard && gameBoard[e] == "") {   // if the board isn't full and there's space available on the clicked div... 
-      gameBoard[e] = player;                 // allow player to play on selected square 
-      gameTurn();
-      computerMove();
-    }
-}; //end of playerMove function
+        /* Function to check X winning move */
+        function checkX() {
+            if ($("#square1").hasClass("xLogo") &&
+                $("#square2").hasClass("xLogo") &&
+                $("#square3").hasClass("xLogo"))
+            {
+                return true;
+            } else if ($("#square4").hasClass("xLogo")
+                    && $("#square5").hasClass("xLogo")
+                    && $("#square6").hasClass("xLogo"))
+            {
+                return true;
+            } else if ($("#square7").hasClass("xLogo")
+                    && $("#square8").hasClass("xLogo")
+                    && $("#square9").hasClass("xLogo"))
+            {
+                return true;
+            } else if ($("#square1").hasClass("xLogo")
+                    && $("#square4").hasClass("xLogo")
+                    && $("#square7").hasClass("xLogo"))
+            {
+                return true;
+            } else if ($("#square2").hasClass("xLogo")
+                    && $("#square5").hasClass("xLogo")
+                    && $("#square8").hasClass("xLogo"))
+            {
+                return true;
+            } else if ($("#square3").hasClass("xLogo")
+                    && $("#square6").hasClass("xLogo")
+                    && $("#square9").hasClass("xLogo"))
+            {
+                return true;
+            } else if ($("#square1").hasClass("xLogo")
+                    && $("#square5").hasClass("xLogo")
+                    && $("#square9").hasClass("xLogo"))
+            {
+                return true;
+            } else if ($("#square3").hasClass("xLogo")
+                    && $("#square5").hasClass("xLogo")
+                    && $("#square7").hasClass("xLogo"))
+            {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        /* Function to check O winning move */
+        function checkO() {
+            if ($("#square1").hasClass("oLogo") &&
+                $("#square2").hasClass("oLogo") &&
+                $("#square3").hasClass("oLogo"))
+            {
+                return true;
+            } else if ($("#square4").hasClass("oLogo")
+                    && $("#square5").hasClass("oLogo")
+                    && $("#square6").hasClass("oLogo"))
+            {
+                return true;
+            } else if ($("#square7").hasClass("oLogo")
+                    && $("#square8").hasClass("oLogo")
+                    && $("#square9").hasClass("oLogo"))
+            {
+                return true;
+            } else if ($("#square1").hasClass("oLogo")
+                    && $("#square4").hasClass("oLogo")
+                    && $("#square7").hasClass("oLogo"))
+            {
+                return true;
+            } else if ($("#square2").hasClass("oLogo")
+                    && $("#square5").hasClass("oLogo")
+                    && $("#square8").hasClass("oLogo"))
+            {
+                return true;
+            } else if ($("#square3").hasClass("oLogo")
+                    && $("#square6").hasClass("oLogo")
+                    && $("#square9").hasClass("oLogo"))
+            {
+                return true;
+            } else if ($("#square1").hasClass("oLogo")
+                    && $("#square5").hasClass("oLogo")
+                    && $("#square9").hasClass("oLogo"))
+            {
+                return true;
+            } else if ($("#square3").hasClass("oLogo")
+                    && $("#square5").hasClass("oLogo")
+                    && $("#square7").hasClass("oLogo"))
+            {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        /*function to check for draw*/
+        function checkDraw() {
+            if (($("#square1").hasClass("occupied"))
+                && ($("#square2").hasClass("occupied"))
+                && ($("#square3").hasClass("occupied"))
+                && ($("#square4").hasClass("occupied"))
+                && ($("#square5").hasClass("occupied"))
+                && ($("#square6").hasClass("occupied"))
+                && ($("#square7").hasClass("occupied"))
+                && ($("#square8").hasClass("occupied"))
+                && ($("#square9").hasClass("occupied")))
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        };
   
-  var computerMove = () => {
-    if (!fullBoard) {                // if the board isn't full... 
-      do {
-        selected = Math.floor(Math.random() * 9); // choose random play for computer 
-      } while (gameBoard[selected] != "");       // as long as the random play is empty... 
-      gameBoard[selected] = computer;             // random space becomes computer's new turn 
-      gameTurn();
-    }
-}; //end of computerMove function
-
-/****** Clear game board for new game ******/
-var clearBoard = () => {
-    gameBoard = ["", "", "", "", "", "", "", "", ""]; //clear the  game board
-    fullBoard = false;                                  
-    winner.removeClass("playerWin");             //remove winner classes  
-    winner.removeClass("computerWin");
-    winner.removeClass("tie");
-    winner.html = "";                                 //clear winner message  
-    updateBoard();
-}; //end of clearBoard function
-
-// link to readme file in footer
-$("footer").on("click", function(){
-    window.open("https://lisabalbach.com/yaple3/CIT190/FinalProject/ticTacToeGame/readmeTicTacToe.txt");
+  //link to readme file in footer
+  $("#footer").click(function() {
+      window.open("https://lisabalbach.com/yaple3/CIT190/FinalProject/ticTacToeGame/readmeTicTacToeGame.txt");
+  });
 });
-
-// button to start new game
-$("#reset").on("click", clearBoard());
